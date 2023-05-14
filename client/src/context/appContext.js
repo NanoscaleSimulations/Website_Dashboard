@@ -1,7 +1,7 @@
 
 import React, { useReducer, useContext } from 'react';
 import reducer from './reducer';
-import { DISPLAY_ALERT, CLEAR_ALERT, SETUP_USER_BEGIN, SETUP_USER_SUCCESS, SETUP_USER_ERROR, TOGGLE_SIDEBAR, LOGOUT_USER, UPDATE_USER_BEGIN, UPDATE_USER_SUCCESS, UPDATE_USER_ERROR, HANDLE_CHANGE, CLEAR_VALUES, CREATE_JOB_BEGIN, CREATE_JOB_SUCCESS, CREATE_JOB_ERROR, CREATE_BLOG_BEGIN, CREATE_BLOG_SUCCESS, CREATE_BLOG_ERROR, GET_JOBS_BEGIN, GET_JOBS_SUCCESS, SET_EDIT_JOB, DELETE_JOB_BEGIN, EDIT_JOB_BEGIN, EDIT_JOB_SUCCESS, EDIT_JOB_ERROR } from "./actions";
+import { DISPLAY_ALERT, CLEAR_ALERT, SETUP_USER_BEGIN, SETUP_USER_SUCCESS, SETUP_USER_ERROR, TOGGLE_SIDEBAR, LOGOUT_USER, UPDATE_USER_BEGIN, UPDATE_USER_SUCCESS, UPDATE_USER_ERROR, HANDLE_CHANGE, CLEAR_VALUES, CREATE_JOB_BEGIN, CREATE_JOB_SUCCESS, CREATE_JOB_ERROR, CREATE_BLOG_BEGIN, CREATE_BLOG_SUCCESS, CREATE_BLOG_ERROR, GET_JOBS_BEGIN, GET_JOBS_SUCCESS, SET_EDIT_JOB, DELETE_JOB_BEGIN, DELETE_JOB_ERROR, EDIT_JOB_BEGIN, EDIT_JOB_SUCCESS, EDIT_JOB_ERROR } from "./actions";
 import axios from 'axios';
 
 
@@ -106,6 +106,7 @@ const removeUserFromLocalStorage = () => {
 
     //
     const setupUser = async ({ currentUser, endPoint, alertText }) => {
+
         // console.log(currentUser);
         dispatch({ type: SETUP_USER_BEGIN });
         try {
@@ -139,6 +140,7 @@ const removeUserFromLocalStorage = () => {
     }
 
     const updateUser = async (currentUser) => {
+
         dispatch({ type: UPDATE_USER_BEGIN });
         try {
             const { data } = await authFetch.patch('/auth/updateUser', currentUser);
@@ -175,6 +177,7 @@ const removeUserFromLocalStorage = () => {
     }
 
     const createJob = async () => {
+
         dispatch({ type: CREATE_JOB_BEGIN });
         try {
             const { position, company, jobLocation, jobType, status } = state;
@@ -228,6 +231,7 @@ const removeUserFromLocalStorage = () => {
     }
 
     const editJob = async () => {
+
         dispatch({ type: EDIT_JOB_BEGIN });
         try {
             const { position, company, jobLocation, jobType, status } = state;
@@ -260,12 +264,19 @@ const removeUserFromLocalStorage = () => {
             await authFetch.delete(`/jobs/${jobId}`);
             getJobs();
         } catch (error) {
-            logoutUser();
+            if (error.response.status === 401) return;
+            dispatch({
+                type: DELETE_JOB_ERROR,
+                payload: { msg: error.response.data.msg },
+            });
         }
+        clearAlert();
     };
+
 
     // BLOG
     const createBlog = async () => {
+
         dispatch({ type: CREATE_BLOG_BEGIN });
         try {
             const { title, subtitle, author, text, fulltext, readmore } = state;
