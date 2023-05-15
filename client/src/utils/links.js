@@ -26,17 +26,23 @@ const links = [
         icon: <FaWpforms />,
     },
     {
-        id: 4,
+        id: 4, 
+        text: 'add blog',
+        path: 'add-blog',
+        icon: <FaBlogger />,
+    },
+    {
+        id: 5, 
+        text: 'all blogs',
+        path: 'all-blogs',
+        icon: <FaBlogger />,
+    },
+    {
+        id: 6,
         text: 'profile',
         path: 'profile',
         icon: <ImProfile />,
     },
-    {
-        id: 5, 
-        text: 'blogs',
-        path: 'blogs',
-        icon: <FaBlogger />,
-    }
 ];
 
 export default links;

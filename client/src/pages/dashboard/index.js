@@ -3,6 +3,7 @@ import AllJobs from "./AllJobs";
 import Profile from "./Profile";
 import Stats from "./Stats";
 import Blogs from "./Blogs";
+import AllBlogs from "./AllBlogs"
 import SharedLayout from "./SharedLayout";
 
-export { AllJobs, AddJob, Profile, Stats, SharedLayout, Blogs };
+export { AllJobs, AddJob, Profile, Stats, SharedLayout, Blogs, AllBlogs };

@@ -12,7 +12,7 @@ import connectDB from './db/connect.js';
 // ROUTERS
 import authRouter from './routes/authRoutes.js';
 import jobsRouter from './routes/jobsRouter.js';
-import blogRouter from './routes/blogRoutes.js';
+import blogsRouter from './routes/blogRoutes.js';
 
 // MIDDLEWARE
 import notFoundMiddleware from './middleware/not-found.js';
@@ -33,7 +33,7 @@ app.get('/api/v1', (req, res) => {
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/jobs', authenticateUser, jobsRouter);
-app.use('/api/v1/blog', authenticateUser, blogRouter);
+app.use('/api/v1/blogs', authenticateUser, blogsRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);

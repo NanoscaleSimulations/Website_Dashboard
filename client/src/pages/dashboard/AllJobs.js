@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React from 'react';
 import { JobsContainer, SearchContainer } from '../../components';
 
 
@@ -15,4 +15,4 @@ const AllJobs = () => {
 
 };
 
-export default AllJobs
+export default AllJobs;
