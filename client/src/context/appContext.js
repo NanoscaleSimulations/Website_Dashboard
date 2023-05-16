@@ -1,9 +1,11 @@
 
 import React, { useReducer, useContext } from 'react';
 import reducer from './reducer';
-import { DISPLAY_ALERT, CLEAR_ALERT, SETUP_USER_BEGIN, SETUP_USER_SUCCESS, SETUP_USER_ERROR, TOGGLE_SIDEBAR, LOGOUT_USER, UPDATE_USER_BEGIN, UPDATE_USER_SUCCESS, UPDATE_USER_ERROR, HANDLE_CHANGE, CLEAR_VALUES, CREATE_JOB_BEGIN, CREATE_JOB_SUCCESS, CREATE_JOB_ERROR, GET_JOBS_BEGIN, GET_JOBS_SUCCESS, SET_EDIT_JOB, DELETE_JOB_BEGIN, DELETE_JOB_ERROR, EDIT_JOB_BEGIN, EDIT_JOB_SUCCESS, EDIT_JOB_ERROR, 
+import { DISPLAY_ALERT, CLEAR_ALERT, SETUP_USER_BEGIN, SETUP_USER_SUCCESS, SETUP_USER_ERROR, TOGGLE_SIDEBAR, LOGOUT_USER, UPDATE_USER_BEGIN, UPDATE_USER_SUCCESS, UPDATE_USER_ERROR, HANDLE_CHANGE, CLEAR_VALUES, 
+CREATE_JOB_BEGIN, CREATE_JOB_SUCCESS, CREATE_JOB_ERROR, GET_JOBS_BEGIN, GET_JOBS_SUCCESS, SET_EDIT_JOB, DELETE_JOB_BEGIN, DELETE_JOB_ERROR, EDIT_JOB_BEGIN, EDIT_JOB_SUCCESS, EDIT_JOB_ERROR, 
 CREATE_BLOG_BEGIN, CREATE_BLOG_SUCCESS, CREATE_BLOG_ERROR, GET_BLOGS_BEGIN, GET_BLOGS_SUCCESS, SET_EDIT_BLOG, DELETE_BLOG_BEGIN, DELETE_BLOG_ERROR, EDIT_BLOG_BEGIN, EDIT_BLOG_SUCCESS, EDIT_BLOG_ERROR,
-SHOW_STATS_BEGIN, SHOW_STATS_SUCCESS
+SHOW_STATS_BEGIN, SHOW_STATS_SUCCESS,
+CLEAR_FILTERS, CHANGE_PAGE
 } from "./actions";
 import axios from 'axios';
 
@@ -39,7 +41,12 @@ export const initialState = {
     blogs: [],
     totalBlogs: 0,
     stats: {},
-    monthlyApplications: []
+    monthlyApplications: [],
+    search: '',
+    searchStatus: 'all',
+    searchType: 'all',
+    sort: 'latest',
+    sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
 };
 
 
@@ -222,33 +229,35 @@ const createJob = async () => {
 
 // Read all jobs
 const getJobs = async () => {
-    let url = `/jobs`
-    
-    dispatch({ type: GET_JOBS_BEGIN })
+
+    const { page, search, searchStatus, searchType, sort } = state;
+
+    let url = `/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+    if (search) {
+        url = url + `&search=${search}`;
+    }
+    dispatch({ type: GET_JOBS_BEGIN });
     try {
-        const { data } = await authFetch(url)
-        const { jobs, totalJobs, numOfPages } = data
+        const { data } = await authFetch(url);
+        const { jobs, totalJobs, numOfPages } = data;
         dispatch({
             type: GET_JOBS_SUCCESS,
             payload: {
-            jobs,
-            totalJobs,
-            numOfPages,
+                jobs,
+                totalJobs,
+                numOfPages,
             },
-        })
+        });
     } catch (error) {
-        console.log(error.response)
-        logoutUser()
+        logoutUser();
     }
-    clearAlert()
+    clearAlert();
 }
-
 
 // Enable to edit a job
 const setEditJob = (id) => {
     dispatch({ type: SET_EDIT_JOB, payload: { id } })
 }
-
 
 // Edit a selected job
 const editJob = async () => {
@@ -318,19 +327,30 @@ const showStats = async () => {
 // JOB CRUD ENDS
 
 
+// Clear Filters
+const clearFilters = () => {
+    dispatch({ type: CLEAR_FILTERS });
+};
+
+// PAGIBATION
+const changePage = (page) => {
+    dispatch({ type: CHANGE_PAGE, payload: { page } })
+}
+
+
 
 // BLOG CRUD STARTS
 const createBlog = async () => {
 
     dispatch({ type: CREATE_BLOG_BEGIN });
     try {
-        const { title, subtitle, author, text, fulltext, readmore } = state;
+        const { title, subtitle, text, author, fulltext, readmore } = state;
         
         await authFetch.post('/blogs', {
             title, 
             subtitle, 
+            text,
             author, 
-            text, 
             fulltext, 
             readmore
         });
@@ -373,21 +393,21 @@ const createBlog = async () => {
         
     }
 
-    // Enable to edit a job
+    // Enable to edit a blog
 const setEditBlog = (id) => {
     dispatch({ type: SET_EDIT_BLOG, payload: { id } })
 }
 
 
-// Edit a selected job
+// Edit a selected blog
 const editBlog = async () => {
 
     dispatch({ type: EDIT_BLOG_BEGIN });
     try {
-        const { title, subtitle, author, text, fulltext, readmore } = state;
+        const { title, subtitle, text, author, fulltext, readmore } = state;
 
         await authFetch.patch(`/blogs/${state.editBlogId}`, {
-            title, subtitle, author, text, fulltext, readmore
+            title, subtitle, text, author, fulltext, readmore
         });
         dispatch({
             type: EDIT_BLOG_SUCCESS,
@@ -404,7 +424,7 @@ const editBlog = async () => {
 };
     
 
-// Delete a job
+// Delete a blog
 const deleteBlog = async (blogId) => {
 
     dispatch({ type: DELETE_BLOG_BEGIN });
@@ -442,7 +462,9 @@ const deleteBlog = async (blogId) => {
             setEditBlog,
             deleteBlog,
             editBlog,
-            showStats
+            showStats,
+            clearFilters,
+            changePage,
             }} >
         {children}
         </AppContext.Provider>

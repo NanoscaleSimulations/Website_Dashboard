@@ -30,12 +30,9 @@ const createJob = async (req, res) => {
 const getAllJobs = async (req, res) => {
 
     const { status, jobType, sort, search } = req.query;
-
-    const queryObject = {
-        createdBy: req.user.userId,
-    };
+    const queryObject = { createdBy: req.user.userId, };
+    
     // add stuff based on condition
-
     if (status && status !== 'all') {
         queryObject.status = status;
     }
@@ -45,12 +42,11 @@ const getAllJobs = async (req, res) => {
     if (search) {
         queryObject.position = { $regex: search, $options: 'i' };
     }
-    // NO AWAIT
 
+    // NO AWAIT
     let result = Job.find(queryObject);
 
     // chain sort conditions
-
     if (sort === 'latest') {
         result = result.sort('-createdAt');
     }

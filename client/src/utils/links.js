@@ -27,14 +27,14 @@ const links = [
     },
     {
         id: 4, 
-        text: 'add blog',
-        path: 'add-blog',
+        text: 'all blogs',
+        path: 'all-blogs',
         icon: <FaBlogger />,
     },
     {
         id: 5, 
-        text: 'all blogs',
-        path: 'all-blogs',
+        text: 'add blog',
+        path: 'add-blog',
         icon: <FaBlogger />,
     },
     {

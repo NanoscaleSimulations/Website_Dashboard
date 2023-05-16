@@ -2,6 +2,7 @@
 import Blog from '../models/Blog.js';
 import { StatusCodes } from 'http-status-codes';
 import { BadRequestError, NotFoundError } from '../errors/index.js';
+import checkPermissions from '../utils/checkPermissions.js';
 
 
 
@@ -71,9 +72,9 @@ const getAllBlogs = async (req, res) => {
 const updateBlog = async (req, res) => {
 
     const { id: blogId } = req.params;
-    const { title, subtitle, author, text, fulltext, readmore } = req.body;
+    const { title, subtitle, text, author, fulltext, readmore } = req.body;
 
-    if (!title || !subtitle) {
+    if (!title || !subtitle || !text || !author || !fulltext || !readmore) {
         throw new BadRequestError('Please provide all values');
     }
     const blog = await Blog.findOne({ _id: blogId });

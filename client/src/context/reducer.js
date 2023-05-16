@@ -24,7 +24,7 @@ import {
     EDIT_JOB_SUCCESS, 
     EDIT_JOB_ERROR, 
     CREATE_BLOG_BEGIN, CREATE_BLOG_SUCCESS, CREATE_BLOG_ERROR, GET_BLOGS_BEGIN, GET_BLOGS_SUCCESS, SET_EDIT_BLOG, DELETE_BLOG_BEGIN, DELETE_BLOG_ERROR, EDIT_BLOG_BEGIN, EDIT_BLOG_SUCCESS, EDIT_BLOG_ERROR, 
-    SHOW_STATS_BEGIN, SHOW_STATS_SUCCESS
+    SHOW_STATS_BEGIN, SHOW_STATS_SUCCESS, CLEAR_FILTERS, CHANGE_PAGE, 
 } from "./actions";
 import { initialState } from "./appContext";
 
@@ -128,11 +128,13 @@ const reducer = (state, action) => {
         }
     }
 
+
     if (action.type === HANDLE_CHANGE) {
+        // set back to first page
         return { 
             ...state, 
-            [action.payload.name]: action.payload.value 
-        };
+            page: 1, 
+            [action.payload.name]: action.payload.value };
     }
 
     // GLOBAL CLEAR VALUES
@@ -262,6 +264,22 @@ const reducer = (state, action) => {
         };
     }
 
+
+    // CLEAR FILTER
+    if (action.type === CLEAR_FILTERS) {
+        return {
+            ...state,
+            search: '',
+            searchStatus: 'all',
+            searchType: 'all',
+            sort: 'latest',
+        };
+    }
+
+    // CHANGE PAGE
+    if (action.type === CHANGE_PAGE) {
+        return { ...state, page: action.payload.page };
+    }
 
     
     // BLOG
