@@ -4,8 +4,6 @@ import { StatusCodes } from "http-status-codes";
 
 const errorHandlerMiddleware = (err, req, res, next) => {
 
-    console.log(err);
-
     // Create the object defaultError with the automatic 500 error by the StatusCodes and setup the props msg
     const defaultError = {
         // Provide this err msg in your browser

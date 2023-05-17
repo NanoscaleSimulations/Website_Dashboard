@@ -12,6 +12,10 @@ const Navbar = () => {
 
     const { toggleSidebar, logoutUser, user } = useAppContext();
 
+    const current = new Date();
+    const date = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
+
+
     return (
         <Wrapper>
             <div className='nav-center'>
@@ -21,6 +25,7 @@ const Navbar = () => {
                 <div>
                     <Logo />
                     <h3 className='logo-text'>dashboard</h3>
+                    <p className='logo-text'>Current date: {date}</p>
                 </div>
 
                 <div className='btn-container'>

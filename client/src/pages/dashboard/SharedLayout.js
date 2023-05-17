@@ -16,7 +16,8 @@ const SharedLayout = () => {
                 <div>
                     <Navbar />
                     <div className='dashboard-page'>
-                    <h2 style={{textAlign:'center'}}>Welcome dear: <span style={{display:'block', color: 'deepskyblue'}}>{user?.name} {user?.lastName}</span></h2>
+                    <h2 style={{textAlign:'center'}}>Welcome: <span style={{color: 'deepskyblue'}}>{user?.name} {user?.lastName}</span></h2>
+                    <hr style={{marginBottom:30}}></hr>
                     <Outlet />
                     </div>
                 </div>

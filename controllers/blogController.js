@@ -10,7 +10,7 @@ const createBlog = async (req, res) => {
 
     const { title, subtitle, text, author, readmore, fulltext } = req.body;
 
-    if (!title || !text || !subtitle || !author || !readmore || !fulltext) {
+    if (!title || !subtitle || !author || !text || !readmore || !fulltext) {
         throw new BadRequestError('Please Provide All Values');
     }
 
@@ -22,36 +22,14 @@ const createBlog = async (req, res) => {
 
 const getAllBlogs = async (req, res) => {
     
-    const { sort, search } = req.query;
-
     const queryObject = {
         createdBy: req.user.userId,
     };
     // add stuff based on condition
 
-    if (search) {
-        queryObject.position = { $regex: search, $options: 'i' };
-    }
     // NO AWAIT
 
     let result = Blog.find(queryObject);
-
-    // chain sort conditions
-
-    if (sort === 'latest') {
-        result = result.sort('-createdAt');
-    }
-    if (sort === 'oldest') {
-        result = result.sort('createdAt');
-    }
-    if (sort === 'a-z') {
-        result = result.sort('position');
-    }
-    if (sort === 'z-a') {
-        result = result.sort('-position');
-    }
-
-    //
 
     // setup pagination
     const page = Number(req.query.page) || 1;
@@ -74,7 +52,7 @@ const updateBlog = async (req, res) => {
     const { id: blogId } = req.params;
     const { title, subtitle, text, author, fulltext, readmore } = req.body;
 
-    if (!title || !subtitle || !text || !author || !fulltext || !readmore) {
+    if (!title || !subtitle || !author || !text || !readmore || !fulltext) {
         throw new BadRequestError('Please provide all values');
     }
     const blog = await Blog.findOne({ _id: blogId });
