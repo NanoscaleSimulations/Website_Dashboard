@@ -3,7 +3,7 @@ import { IoBarChartSharp } from 'react-icons/io5';
 import { MdQueryStats } from 'react-icons/md';
 import { FaWpforms } from 'react-icons/fa';
 import { ImProfile } from 'react-icons/im';
-import { FaBlogger } from 'react-icons/fa';
+import { FaBlogger, FaUsers } from 'react-icons/fa';
 import { GiWorld } from 'react-icons/gi';
 
 // path needs to be the same as in the app.js
@@ -62,6 +62,12 @@ const links = [
         path: 'profile',
         icon: <ImProfile />,
     },
+    {
+        id: 10,
+        text: 'users',
+        path: 'users',
+        icon: <FaUsers />
+    }
 ];
 
 export default links;
