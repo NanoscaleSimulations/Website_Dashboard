@@ -24,7 +24,7 @@ import {
     EDIT_JOB_SUCCESS, 
     EDIT_JOB_ERROR, 
     CREATE_BLOG_BEGIN, CREATE_BLOG_SUCCESS, CREATE_BLOG_ERROR, GET_BLOGS_BEGIN, GET_BLOGS_SUCCESS, SET_EDIT_BLOG, DELETE_BLOG_BEGIN, DELETE_BLOG_ERROR, EDIT_BLOG_BEGIN, EDIT_BLOG_SUCCESS, EDIT_BLOG_ERROR, 
-    SHOW_STATS_BEGIN, SHOW_STATS_SUCCESS, CLEAR_FILTERS, CHANGE_PAGE, 
+    SHOW_STATS_BEGIN, SHOW_STATS_SUCCESS, CLEAR_FILTERS, CHANGE_PAGE, GET_CURRENT_USER_BEGIN, GET_CURRENT_USER_SUCCESS
 } from "./actions";
 import { initialState } from "./appContext";
 
@@ -62,7 +62,6 @@ const reducer = (state, action) => {
         return { 
             ...state, 
             isLoading: false, 
-            token:action.payload.token, 
             user:action.payload.user, 
             userLocation:action.payload.location, 
             jobLocation:action.payload.location, 
@@ -92,11 +91,7 @@ const reducer = (state, action) => {
     if(action.type === LOGOUT_USER) {
         return {
             ...initialState,
-            user: null,
-            token: null,
-            jobLocation: '',
-            userLocation: '',
-
+            userLoading: false,
         };
     }
 
@@ -108,7 +103,6 @@ const reducer = (state, action) => {
         return {
             ...state,
             isLoading: false,
-            token:action.payload.token,
             user: action.payload.user,
             userLocation: action.payload.location,
             jobLocation: action.payload.location,
@@ -279,6 +273,22 @@ const reducer = (state, action) => {
     // CHANGE PAGE
     if (action.type === CHANGE_PAGE) {
         return { ...state, page: action.payload.page };
+    }
+
+
+    // GET CURRENT USER COOKIE
+    if (action.type === GET_CURRENT_USER_BEGIN) {
+        return { ...state, userLoading: true, showAlert: false };
+    }
+
+    if (action.type === GET_CURRENT_USER_SUCCESS) {
+        return {
+            ...state,
+            userLoading: false,
+            user: action.payload.user,
+            userLocation: action.payload.location,
+            jobLocation: action.payload.location,
+        };
     }
 
     

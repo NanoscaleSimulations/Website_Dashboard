@@ -14,6 +14,9 @@ import helmet from 'helmet';
 import xss from 'xss-clean';
 import mongoSanitize from 'express-mongo-sanitize';
 
+// COOKIE
+import cookieParser from 'cookie-parser';
+
 // DB AND AUTH
 import connectDB from './db/connect.js';
 
@@ -34,6 +37,7 @@ if(process.env.NODE_ENV !== 'production') {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());

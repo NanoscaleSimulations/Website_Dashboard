@@ -3,8 +3,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Register from './pages/Register';
 import Error from './pages/Error';
+import WebBlogs from './pages/WebBlogs';
 import ProtectedRoute from './pages/ProtectedRoute';
-import { AllJobs, AddJob, Profile, Stats, SharedLayout, Blogs,  } from './pages/dashboard';
+import { AllJobs, AddJob, Profile, Stats, SharedLayout, Blogs } from './pages/dashboard';
 import AllBlogs from './pages/dashboard/AllBlogs';
 
 
@@ -32,6 +33,7 @@ function App() {
           </Route>
             <Route path='/register' element={<Register />} />
             <Route path='/landing' element={<Landing />} />
+            <Route path='/webblogs' element={<WebBlogs />} />
             <Route path='*' element={<Error />} />
         </Routes>
       </BrowserRouter>
