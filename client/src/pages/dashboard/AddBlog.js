@@ -5,7 +5,7 @@ import { useAppContext } from '../../context/appContext';
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
 
 
-const Blogs = () => {
+const AddBlog = () => {
 
     const {
         isLoading,
@@ -119,4 +119,4 @@ const Blogs = () => {
 
 };
 
-export default Blogs;
+export default AddBlog;

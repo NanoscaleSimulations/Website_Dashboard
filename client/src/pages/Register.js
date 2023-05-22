@@ -54,7 +54,6 @@ const Register = () => {
             }) 
         }
     };
-
     useEffect(() => {
         if(user) {
             setTimeout(() => {
@@ -63,9 +62,9 @@ const Register = () => {
         }
     }, [user, navigate]); // iterate it - inwoke it when user making navigate changes
 
+
     return (
         <Wrapper className='full-page'>
-
             <form className='form' onSubmit={onSubmit}>
 
                 <Logo />
@@ -101,6 +100,7 @@ const Register = () => {
                 <button type='submit' className='btn btn-block' disabled={isLoading}>
                     Submit
                 </button>
+
                 <button
                     type='button'
                     className='btn btn-block btn-hipster'
@@ -115,6 +115,7 @@ const Register = () => {
                 >
                     {isLoading ? 'loading...' : 'Moderator'}
                 </button>
+
                 <p>
                     {values.isMember ? 'Not a member yet?' : 'Already a member?'}
 
@@ -122,6 +123,7 @@ const Register = () => {
                         {values.isMember ? 'Register' : 'Login'}
                     </button>
                 </p>
+                
             </form>
         </Wrapper>
     );

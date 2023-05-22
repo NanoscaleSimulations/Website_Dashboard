@@ -2,7 +2,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { createBlog, deleteBlog, updateBlog, getAllBlogs } from "../controllers/blogController.js";
+import { createBlog, deleteBlog, updateBlog, getAllBlogs } from "../controllers/blogsController.js";
 
 
 // API ROUTES FOR JOBS

@@ -1,0 +1,449 @@
+figcaption {
+    position:absolute;
+    bottom:38%;
+    border-radius:20px 20px 20px 20px;
+    background-color:white;
+    text-align:center;
+    margin-left:33%;
+    padding: 2%;
+    font-family:Montserrat;
+}
+
+figcaption h1{
+    color:#3C9FE1;
+}
+
+figure img{
+    height: 468px;
+    width:100%;
+}
+
+.hero-icon-section{
+    position:absolute;
+    bottom:25%;
+    border-radius:84px 84px 84px 84px;
+    color:white;
+    margin-left:46%;
+    text-align:center;
+
+}
+
+.hero-icon {
+    
+}
+
+
+
+.about-btn{
+    border: none;
+    position: relative;
+}
+.about-btn:hover{
+    color: #fff;
+}
+.about-btn:after{
+    content: "";
+    width: 0;
+    height: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 0 0 5px 5px;
+    transition: all 0.35s ease 0s;
+}
+.about-btn:hover:after{
+    width: 100%;
+}
+.about-btn.btn-sm{
+    padding-bottom: 10px;
+}
+.about-btn.btn-sm:after{
+    height: 8px;
+}
+.about-btn.btn-xs{
+    padding-bottom: 8px;
+}
+.about-btn.btn-xs:after{
+    height: 6px;
+}
+.about-btn.red:after{
+    background: #ff6e6e;
+}
+.about-btn.blue:after{
+    background: #5cbcf6;
+}
+.about-btn.orange:after{
+    background: #ef965c;
+}
+.about-btn.green:after{
+    background: #7ad79a;
+}
+@media only  screen and (max-width: 767px){
+    .about-btn{ margin-bottom: 20px; }
+}
+
+
+
+.vision-section{
+    margin-top:7%;
+    margin-bottom:7%;
+}
+
+.vision-brødtekst p{
+    padding-left:5%;
+    padding-right:5%;
+    width:80%;
+    padding-top:2%;
+    font-size: 18px;
+    font-family:Outfit;
+
+}
+
+.vision-værdi-sektion{
+    margin-top:7%;
+}
+
+.vision-værdi{
+    border-radius: 84px 84px 84px 84px;
+    outline-style: outset;
+    outline-color: #3C9FE1;
+    max-height:225px;
+    padding:3%;
+}
+
+.vision-værdi:hover{
+    background-color:orange;
+    cursor:pointer;
+}
+
+
+
+
+
+
+.hvem-profil-img{
+    height:150px;
+    width:150px;
+    float:left;
+    margin-right:12%;
+    margin-top:15%;
+}
+
+.hvem-profil-navn{
+    float:right;
+    margin-top:4%;
+    padding:3%;
+    border-radius: 20px 20px 20px 20px
+}
+
+.hvem-profil-navn h3{
+    color:black;
+}
+
+
+.hvem-content{
+    margin-top:6%;
+    margin-left:1%;
+}
+
+.hvem-content h4{
+    color:#3C9FE1;
+}
+
+.hvem-content p {
+    padding-left:5%;
+    padding-right:5%;
+    padding-top:1%;
+    width:85%;
+}
+
+
+
+
+.hvem-profil-img-right{
+    height:150px;
+    width:150px;
+    float:right;
+    margin-left:12%;
+    margin-top:15%;
+}
+
+.hvem-profil-navn-right{
+    float:left;
+    margin-top:4%;
+    padding:3%;
+    border-radius: 20px 20px 20px 20px
+}
+
+.hvem-profil-navn-right h3{
+    color:black;
+}
+
+
+.hvem-content-right{
+    margin-top:6%;
+    margin-right:1%;
+}
+
+.hvem-rolle-right{
+    float:right;
+    width:85%;
+}
+
+.hvem-historie-right{
+    float:right;
+    width:85%;
+}
+
+.hvem-content-right h4{
+    color:#3C9FE1;
+    float:right;
+}
+
+.hvem-content-right p {
+    padding-left:5%;
+    padding-right:5%;
+    padding-top:1%;
+    float:right;
+}
+
+
+
+
+
+.vores-projekter-sektion {
+    margin-top:7%;
+    margin-bottom:4%;
+}
+
+.vores-projekter-content a{
+    color:white;
+}
+
+.vores-projekter-content a:hover{
+    color:black;
+}
+
+.card-læs-mere {
+
+}
+
+.læs-mere-img{
+    border-radius:0px 20px 20px 0px;
+}
+
+.læs-mere-img-left{
+    border-radius:20px 0px 0px 20px;
+}
+
+
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    figcaption {
+        position:inherit;
+        bottom:inherit;
+        margin: 0.25rem 0px;
+    }
+    .hero-icon-section {
+        position:inherit;
+        bottom:inherit;
+        margin: 0.75rem 0px;
+        color:#3C9FE1;
+    }
+    .hero-icon{
+        position:inherit;
+        bottom:inherit;
+        margin: 0.75rem 0px;
+        color:#3C9FE1;
+    }
+    .vision-værdi .vision-img{
+        width:100%;
+    }
+    .hvem-profil-navn{
+        float:none;
+        text-align: center;
+        margin-top:3%;
+    }
+    .hvem-profil-img{
+        float:none;
+        text-align: center;
+        margin-left:33%;
+        margin-top:3%;
+    }
+    .hvem-content h4{
+        text-align:left;
+        width:100%;
+    }
+    .hvem-content p{
+        text-align:left;
+        width:100%;
+        padding:0px;
+    }
+    .hvem-profil-navn-right{
+        float:none;
+        text-align: center;
+        margin-top:3%;
+    }
+    .hvem-profil-img-right{
+        float:none;
+        text-align: center;
+        margin-right:33%;
+        margin-top:3%;
+    }
+    .hvem-content-right h4{
+        text-align:left;
+        width:100%;
+    }
+    .hvem-content-right p{
+        text-align:left;
+        width:100%;
+        padding:0px;
+    }
+    .hvem-rolle-right{
+        width:100%;
+    }
+    .hvem-historie-right{
+        width:100%;
+    }
+    .læs-mere-row{
+        margin-bottom:-16px;
+    }
+    .card-læs-mere{
+        background-color:#3C9FE1;
+        border-radius:0px 0px 20px 20px;
+        margin-bottom:5%;
+        padding:1%;
+    }
+    .card-læs-mere a{
+        color:white;
+        
+    }
+    .læs-mere-img{
+        border-radius: 20px 20px 0px 0px;
+    }
+
+    .læs-mere-img-left{
+        border-radius: 20px 20px 0px 0px;
+    }
+    .læs-mere-titel h4{
+        margin-top:2%;
+        padding-top:2%;
+    }
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .læs-mere-row{
+        background-color:#3C9FE1;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media screen and (max-width: 760px) {
+    figcaption {
+        position:inherit;
+        bottom:inherit;
+        margin: 0.25rem 0px;
+    }
+    .hero-icon-section {
+        position:inherit;
+        bottom:inherit;
+        margin: 0.75rem 0px;
+        color:#3C9FE1;
+    }
+    .hero-icon{
+        position:inherit;
+        bottom:inherit;
+        margin: 0.75rem 0px;
+        color:#3C9FE1;
+    }
+    .vision-værdi .vision-img{
+        width:100%;
+    }
+    .hvem-profil-navn{
+        float:none;
+        text-align: center;
+        margin-top:3%;
+    }
+    .hvem-profil-img{
+        float:none;
+        margin-left:25%;
+        margin-top:3%;
+    }
+    .hvem-profil-navn-right{
+        float:none;
+        text-align: center;
+        margin-top:3%;
+    }
+    .hvem-profil-img-right{
+        float:none;
+        margin-left:25%;
+        margin-top:3%;
+    }
+
+
+}
+
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and ( max-width: 900px) {
+    figcaption {
+        position:inherit;
+        bottom:inherit;
+        margin: 0.25rem 0px;
+    }
+    .hero-icon-section {
+        position:inherit;
+        bottom:inherit;
+        margin: 0.75rem 0px;
+        color:#3C9FE1;
+    }
+    .hero-icon{
+        position:inherit;
+        bottom:inherit;
+        margin: 0.75rem 0px;
+        color:#3C9FE1;
+    }
+    .vision-værdi .vision-img{
+        width:100%;
+    }
+    .hvem-profil-navn{
+        float:none;
+        text-align: center;
+        margin-top:3%;
+    }
+    .hvem-profil-img{
+        margin-top:3%;
+    }
+    .hvem-profil-navn-right{
+        float:none;
+        text-align: center;
+        margin-top:3%;
+    }
+    .hvem-profil-img-right{
+        margin-top:3%;
+    }
+
+
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .hvem-profil-img{
+        float:right;
+    }
+    .hvem-profil-img-right{
+        float:left;
+    }
+    .hvem-profil-navn-right{
+        float:left;
+    }
+    .læs-mere-row{
+        background-color:#3C9FE1;
+    }
+
+}

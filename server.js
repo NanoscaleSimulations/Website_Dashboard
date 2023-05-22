@@ -23,7 +23,7 @@ import connectDB from './db/connect.js';
 // ROUTERS
 import authRouter from './routes/authRoutes.js';
 import jobsRouter from './routes/jobsRouter.js';
-import blogsRouter from './routes/blogRoutes.js';
+import blogsRouter from './routes/blogsRouter.js';
 
 // MIDDLEWARE
 import notFoundMiddleware from './middleware/not-found.js';

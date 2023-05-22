@@ -10,18 +10,18 @@ const SharedLayout = () => {
     return (
         <>
         <Wrapper>
-            <main className='dashboard'>
+            <div className='dashboard'>
                 <SmallSidebar />
                 <BigSidebar />
                 <div>
                     <Navbar />
                     <div className='dashboard-page'>
-                    <h2 style={{textAlign:'center'}}>Welcome: <span style={{color: 'deepskyblue'}}>{user?.name} {user?.lastName}</span></h2>
-                    <hr style={{marginBottom:30}}></hr>
+                        <h2 style={{textAlign:'center'}}>Welcome: <span style={{color: 'deepskyblue'}}>{user?.name} {user?.lastName}</span></h2>
+                    <hr></hr>
                     <Outlet />
                     </div>
                 </div>
-            </main>
+            </div>
         </Wrapper>
         </>
     );

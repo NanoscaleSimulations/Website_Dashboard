@@ -12,18 +12,14 @@ const BigSidebar = () => {
 
     return (
         <Wrapper>
-        <div
-            className={
-            showSidebar ? 'sidebar-container ' : 'sidebar-container show-sidebar'
-            }
-        >
-            <div className='content'>
-            <header>
+            <div
+                className={
+                showSidebar ? 'sidebar-container ' : 'sidebar-container show-sidebar'
+                }
+            >
                 <Logo />
-            </header>
-            <NavLinks />
+                <NavLinks />
             </div>
-        </div>
         </Wrapper>
     );
 
