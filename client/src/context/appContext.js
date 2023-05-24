@@ -1,18 +1,16 @@
 
 import React, { useReducer, useContext, useEffect } from 'react';
 import reducer from './reducer';
-import { DISPLAY_ALERT, CLEAR_ALERT, SETUP_USER_BEGIN, SETUP_USER_SUCCESS, SETUP_USER_ERROR, TOGGLE_SIDEBAR, LOGOUT_USER, UPDATE_USER_BEGIN, UPDATE_USER_SUCCESS, UPDATE_USER_ERROR, HANDLE_CHANGE, CLEAR_VALUES, 
-CREATE_JOB_BEGIN, CREATE_JOB_SUCCESS, CREATE_JOB_ERROR, GET_JOBS_BEGIN, GET_JOBS_SUCCESS, SET_EDIT_JOB, DELETE_JOB_BEGIN, DELETE_JOB_ERROR, EDIT_JOB_BEGIN, EDIT_JOB_SUCCESS, EDIT_JOB_ERROR, 
-CREATE_BLOG_BEGIN, CREATE_BLOG_SUCCESS, CREATE_BLOG_ERROR, GET_BLOGS_BEGIN, GET_BLOGS_SUCCESS, SET_EDIT_BLOG, DELETE_BLOG_BEGIN, DELETE_BLOG_ERROR, EDIT_BLOG_BEGIN, EDIT_BLOG_SUCCESS, EDIT_BLOG_ERROR,
-SHOW_STATS_BEGIN, SHOW_STATS_SUCCESS,
-CLEAR_FILTERS, CHANGE_PAGE,
-GET_CURRENT_USER_BEGIN, GET_CURRENT_USER_SUCCESS
+import {
+    DISPLAY_ALERT, CLEAR_ALERT, SETUP_USER_BEGIN, SETUP_USER_SUCCESS, SETUP_USER_ERROR, TOGGLE_SIDEBAR, LOGOUT_USER, UPDATE_USER_BEGIN, UPDATE_USER_SUCCESS, UPDATE_USER_ERROR, HANDLE_CHANGE, CLEAR_VALUES,
+    CREATE_BLOG_BEGIN, CREATE_BLOG_SUCCESS, CREATE_BLOG_ERROR, GET_BLOGS_BEGIN, GET_BLOGS_SUCCESS, SET_EDIT_BLOG, DELETE_BLOG_BEGIN, DELETE_BLOG_ERROR, EDIT_BLOG_BEGIN, EDIT_BLOG_SUCCESS, EDIT_BLOG_ERROR,
+    SHOW_STATS_BEGIN, SHOW_STATS_SUCCESS,
+    CLEAR_FILTERS, CHANGE_PAGE,
+    GET_CURRENT_USER_BEGIN, GET_CURRENT_USER_SUCCESS, CLEAR_BLOG_VALUES, HANDLE_FILE_CHANGE
 } from "./actions";
 import axios from 'axios';
 
-
-
-export const initialState = {
+const initialState = {
     userLoading: true,
     isLoading: false,
     showAlert: false,
@@ -20,23 +18,10 @@ export const initialState = {
     alertType: '',
     user: null,
     userLocation: '',
-    showSidebar: false, 
+    showSidebar: false,
     isEditing: false,
-    editJobId: '',
-    position: '',
-    company: '',
-    jobLocation: '',
-    jobTypeOptions: ['full-time', 'part-time', 'remote', 'internship'],
-    jobType: 'full-time',  
-    statusOptions: ['interview', 'declined', 'pending'],
-    status: 'pending',
-    jobs: [],
-    totalJobs: 0,
     numOfPages: 1,
     page: 1,
-    editBlogId: '',
-    blogs: [],
-    totalBlogs: 0,
     stats: {},
     monthlyApplications: [],
     search: '',
@@ -44,6 +29,18 @@ export const initialState = {
     searchType: 'all',
     sort: 'latest',
     sortOptions: ['latest', 'oldest', 'a-z', 'z-a'],
+
+    // blog properties
+    blogs: [],
+    totalBlogs: 0,
+    title: '',
+    subtitle: '',
+    author: '',
+    description: '',
+    readmore: '',
+    fulltext: '',
+    editBlogId: '',
+    blogImage: [],
 };
 
 
@@ -103,7 +100,7 @@ const AppProvider = ({ children }) => {
             const { user, location } = data;
             dispatch({
                 type: SETUP_USER_SUCCESS,
-                payload: { user,  location, alertText },
+                payload: { user, location, alertText },
             })
         } catch (error) {
             dispatch({
@@ -130,16 +127,16 @@ const AppProvider = ({ children }) => {
         dispatch({ type: UPDATE_USER_BEGIN });
         try {
             const { data } = await authFetch.patch('/auth/updateUser', currentUser);
-            
+
             // no token
-            const { user, location} = data;
-            
+            const { user, location } = data;
+
             dispatch({
                 type: UPDATE_USER_SUCCESS,
                 payload: { user, location },
             });
         } catch (error) {
-            if(error.response.status !== 401) {
+            if (error.response.status !== 401) {
                 dispatch({
                     type: UPDATE_USER_ERROR,
                     payload: { msg: error.response.data.msg },
@@ -157,60 +154,91 @@ const AppProvider = ({ children }) => {
         })
     }
 
+    const handleInputFileChange = ({ name, value }) => {
+        dispatch({ type: HANDLE_FILE_CHANGE, payload: { name, value } });
+    };
+
+    const clearBlogValues = () => {
+        dispatch({ type: CLEAR_BLOG_VALUES });
+    };
+
 
     const clearValues = () => {
         dispatch({ type: CLEAR_VALUES })
     }
 
+    // Show all stats from the 3 different status
 
-    // JOB CRUD START
-    const createJob = async () => {
+    // const showStats = async () => {
+    //     dispatch({ type: SHOW_STATS_BEGIN })
+    //     try {
+    //         const { data } = await authFetch('/jobs/stats')
+    //         dispatch({
+    //             type: SHOW_STATS_SUCCESS,
+    //             payload: {
+    //                 stats: data.defaultStats,
+    //                 monthlyApplications: data.monthlyApplications,
+    //             },
+    //         })
+    //     } catch (error) {
+    //         console.log(error.response)
+    //         logoutUser()
+    //     }
 
-        dispatch({ type: CREATE_JOB_BEGIN });
+    //     clearAlert()
+    // }
+
+
+    // BLOG CRUD BEGINS
+    const createBlog = async () => {
+        dispatch({ type: CREATE_BLOG_BEGIN });
         try {
-            const { position, company, jobLocation, jobType, status } = state;
-            
-            await authFetch.post('/jobs', {
-                company,
-                position,
-                jobLocation,
-                jobType,
-                status,
-            });
-            dispatch({
-                type: CREATE_JOB_SUCCESS,
-            });
-            // call function instead clearValues()
-            dispatch({ type: CLEAR_VALUES });
+            const { title, subtitle, author, description, readmore, fulltext, blogImage } = state;
+            // using form data beacuse image file is uploaded
+            const formData = new FormData();
+            formData.append('title', title);
+            formData.append('subtitle', subtitle);
+            formData.append('author', author);
+            formData.append('description', description);
+            formData.append('readmore', readmore);
+            formData.append('fulltext', fulltext);
+            formData.append('blogImage', blogImage);
+
+            await authFetch.post('/blog', formData, {});
+
+            dispatch({ type: CREATE_BLOG_SUCCESS });
+            dispatch({ type: CLEAR_BLOG_VALUES });
         } catch (error) {
             if (error.response.status === 401) return;
             dispatch({
-                type: CREATE_JOB_ERROR,
+                type: CREATE_BLOG_ERROR,
                 payload: { msg: error.response.data.msg },
             });
         }
         clearAlert();
     };
 
-
-    // Read all jobs
-    const getJobs = async () => {
-
+    const getBlogs = async (landingPage) => {
         const { page, search, searchStatus, searchType, sort } = state;
-
-        let url = `/jobs?page=${page}&status=${searchStatus}&jobType=${searchType}&sort=${sort}`;
+        let url = '';
+        if (landingPage) {
+            url = `/landing-blog?page=${page}&status=${searchStatus}&blogType=${searchType}&sort=${sort}&isLanding=${landingPage}`;
+        }
+        else {
+            url = `/blog?page=${page}&status=${searchStatus}&blogType=${searchType}&sort=${sort}&isLanding=${landingPage}`;
+        }
         if (search) {
             url = url + `&search=${search}`;
         }
-        dispatch({ type: GET_JOBS_BEGIN });
+        dispatch({ type: GET_BLOGS_BEGIN });
         try {
-            const { data } = await authFetch(url);
-            const { jobs, totalJobs, numOfPages } = data;
+            const { data } = await authFetch.get(url);
+            const { blogs, totalBlogs, numOfPages } = data;
             dispatch({
-                type: GET_JOBS_SUCCESS,
+                type: GET_BLOGS_SUCCESS,
                 payload: {
-                    jobs,
-                    totalJobs,
+                    blogs,
+                    totalBlogs,
                     numOfPages,
                 },
             });
@@ -218,80 +246,57 @@ const AppProvider = ({ children }) => {
             logoutUser();
         }
         clearAlert();
-    }
-
-    // Enable to edit a job
-    const setEditJob = (id) => {
-        dispatch({ type: SET_EDIT_JOB, payload: { id } })
-    }
-
-    // Edit a selected job
-    const editJob = async () => {
-
-        dispatch({ type: EDIT_JOB_BEGIN });
-        try {
-            const { position, company, jobLocation, jobType, status } = state;
-
-            await authFetch.patch(`/jobs/${state.editJobId}`, {
-                company,
-                position,
-                jobLocation,
-                jobType,
-                status,
-            });
-            dispatch({
-                type: EDIT_JOB_SUCCESS,
-            });
-            dispatch({ type: CLEAR_VALUES });
-        } catch (error) {
-            if (error.response.status === 401) return;
-            dispatch({
-                type: EDIT_JOB_ERROR,
-                payload: { msg: error.response.data.msg },
-            });
-        }
-        clearAlert();
     };
-        
 
-    // Delete a job
-    const deleteJob = async (jobId) => {
+    const setEditBlog = (id) => {
+        dispatch({ type: SET_EDIT_BLOG, payload: { id } });
+    };
 
-        dispatch({ type: DELETE_JOB_BEGIN });
+    const editBlog = async () => {
+        dispatch({ type: EDIT_BLOG_BEGIN });
+
         try {
-            await authFetch.delete(`/jobs/${jobId}`);
-            getJobs();
+            const { title,
+                subtitle,
+                author,
+                description,
+                readmore,
+                fulltext } = state;
+
+            await authFetch.patch(`/blog/${state.editBlogId}`, {
+                title,
+                subtitle,
+                author,
+                description,
+                readmore,
+                fulltext
+            });
+            dispatch({ type: EDIT_BLOG_SUCCESS });
+            dispatch({ type: CLEAR_BLOG_VALUES });
         } catch (error) {
             if (error.response.status === 401) return;
             dispatch({
-                type: DELETE_JOB_ERROR,
+                type: EDIT_BLOG_ERROR,
                 payload: { msg: error.response.data.msg },
             });
         }
         clearAlert();
     };
 
-    // Show all stats from the 3 different status
-    const showStats = async () => {
-        dispatch({ type: SHOW_STATS_BEGIN })
+    const deleteBlog = async (BlogId) => {
+        dispatch({ type: DELETE_BLOG_BEGIN });
         try {
-            const { data } = await authFetch('/jobs/stats')
-            dispatch({
-            type: SHOW_STATS_SUCCESS,
-            payload: {
-                stats: data.defaultStats,
-                monthlyApplications: data.monthlyApplications,
-            },
-            })
+            await authFetch.delete(`/blog/${BlogId}`);
+            getBlogs();
         } catch (error) {
-        console.log(error.response)
-            logoutUser()
+            if (error.response.status === 401) return;
+            dispatch({
+                type: DELETE_BLOG_ERROR,
+                payload: { msg: error.response.data.msg },
+            });
         }
-        
-        clearAlert()
-    }
-    // JOB CRUD ENDS
-
+        clearAlert();
+    };
 
     // Clear Filters
     const clearFilters = () => {
@@ -311,8 +316,8 @@ const AppProvider = ({ children }) => {
             const { user, location } = data;
 
             dispatch({
-            type: GET_CURRENT_USER_SUCCESS,
-            payload: { user, location },
+                type: GET_CURRENT_USER_SUCCESS,
+                payload: { user, location },
             });
         } catch (error) {
             if (error.response.status === 401) return;
@@ -321,149 +326,44 @@ const AppProvider = ({ children }) => {
     };
     useEffect(() => {
         getCurrentUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    // BLOG CRUD ENDS
 
-
-    // BLOG CRUD STARTS
-    const createBlog = async () => {
-
-        dispatch({ type: CREATE_BLOG_BEGIN });
-        try {
-            const { title, subtitle, text, author, fulltext, readmore } = state;
-            
-            await authFetch.post('/blogs', {
-                title, 
-                subtitle, 
-                text,
-                author, 
-                fulltext, 
-                readmore
-            });
-            dispatch({
-                type: CREATE_BLOG_SUCCESS,
-            });
-            // call function instead clearValues()
-            dispatch({ type: CLEAR_VALUES });
-        } catch (error) {
-            if (error.response.status === 401) return;
-            dispatch({
-                type: CREATE_BLOG_ERROR,
-                payload: { msg: error.response.data.msg },
-            });
-        }
-        clearAlert();
-    };
-
-        const getBlogs = async () => {
-        
-            let url = `/blogs`
-        
-            dispatch({ type: GET_BLOGS_BEGIN })
-            try {
-                const { data } = await authFetch(url)
-                const { blogs, totalBlogs, numOfPages } = data
-                dispatch({
-                    type: GET_BLOGS_SUCCESS,
-                    payload: {
-                        blogs,
-                        totalBlogs,
-                        numOfPages,
-                    },
-                })
-            } catch (error) {
-                console.log(error.response)
-                logoutUser()
-            }
-            clearAlert()
-            
-        }
-
-        // Enable to edit a blog
-    const setEditBlog = (id) => {
-        dispatch({ type: SET_EDIT_BLOG, payload: { id } })
-    }
-
-
-    // Edit a selected blog
-    const editBlog = async () => {
-
-        dispatch({ type: EDIT_BLOG_BEGIN });
-        try {
-            const { title, subtitle, text, author, fulltext, readmore } = state;
-
-            await authFetch.patch(`/blogs/${state.editBlogId}`, {
-                title, subtitle, text, author, fulltext, readmore
-            });
-            dispatch({
-                type: EDIT_BLOG_SUCCESS,
-            });
-            dispatch({ type: CLEAR_VALUES });
-        } catch (error) {
-            if (error.response.status === 401) return;
-            dispatch({
-                type: EDIT_BLOG_ERROR,
-                payload: { msg: error.response.data.msg },
-            });
-        }
-        clearAlert();
-    };
-        
-
-    // Delete a blog
-    const deleteBlog = async (blogId) => {
-
-        dispatch({ type: DELETE_BLOG_BEGIN });
-        try {
-            await authFetch.delete(`/blogs/${blogId}`);
-            getBlogs();
-        } catch (error) {
-            if (error.response.status === 401) return;
-            dispatch({
-                type: DELETE_BLOG_ERROR,
-                payload: { msg: error.response.data.msg },
-            });
-        }
-        clearAlert();
-    };
-    //
     return (
-        <AppContext.Provider 
-        value={{
-            ...state, 
-            displayAlert, 
-            setupUser, 
-            toggleSidebar, 
-            logoutUser, 
-            updateUser, 
-            handleChange, 
-            clearValues, 
-            createJob,
-            getJobs,
-            setEditJob,
-            deleteJob,
-            editJob,
-            createBlog,
-            getBlogs,
-            setEditBlog,
-            deleteBlog,
-            editBlog,
-            showStats,
-            clearFilters,
-            changePage,
-            getCurrentUser,
+        <AppContext.Provider
+            value={{
+                ...state,
+                displayAlert,
+                setupUser,
+                toggleSidebar,
+                logoutUser,
+                updateUser,
+                handleChange,
+                handleInputFileChange,
+                clearValues,
+                clearBlogValues,
+                createBlog,
+                getBlogs,
+                setEditBlog,
+                deleteBlog,
+                editBlog,
+                // showStats,
+                clearFilters,
+                changePage,
+                getCurrentUser,
             }} >
-        {children}
+            {children}
         </AppContext.Provider>
     );
 };
 
 
 // make sure use
-export const useAppContext = () => {
+const useAppContext = () => {
     return useContext(AppContext);
 };
 
 
-export { AppProvider };
+export { AppProvider, initialState, useAppContext };

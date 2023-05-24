@@ -5,6 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "install-dependencies": "npm run install-client && npm install",
+    "setup-production": "npm run install-client && npm run build-client && npm install",
+    "install-client": "cd client && npm install",
     "build-client": "cd client && npm run build",
     "server": "nodemon server --ignore client",
     "client": "npm start --prefix client",
@@ -19,6 +22,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -32,8 +36,10 @@
     "moment": "^2.29.4",
     "mongoose": "^7.1.0",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
     "nth-check": "^2.1.1",
     "react-icons": "^4.8.0",
+    "uuid": "^3.4.0",
     "validator": "^13.9.0",
     "xss-clean": "^0.1.1"
   }

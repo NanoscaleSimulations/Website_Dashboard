@@ -28,7 +28,7 @@ const boxVariant2 = {
 
 
 function Blog() {
-    
+
 
     const control = useAnimation();
     const [ref, inView] = useInView();
@@ -39,21 +39,21 @@ function Blog() {
             control.start("hidden");
         }
     }, [control, inView]);
-    
+
 
     return (
-        <div className="blog">   
-            <Container>     
+        <div className="blog">
+            <Container>
                 <div className="hero-section-blog py-4">
-                    <Row style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                    <Row style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                         <Col xs={12} md={8} lg={10} xl={10}>
                             <div className="media blog-media">
-                                <a href="blog-post-left-sidebar.html"><Image className="d-flex" src={require('../img/galleri6.jpg')} alt="" style={{height:400, maxHeight:400}}/></a>
+                                <a href="blog-post-left-sidebar.html"><Image className="d-flex" src={require('../img/galleri6.jpg')} alt="" style={{ height: 400, maxHeight: 400 }} /></a>
                                 <div className="circle">
                                     <h5 className="day">JP</h5>
                                 </div>
                                 <div className="media-body pb-4">
-                                    <BlogMain/>
+                                    <BlogMain />
                                 </div>
                             </div>
                         </Col>
@@ -72,45 +72,45 @@ function Blog() {
                 </Row>
 
 
-                <div className="blog-section-one" style={{paddingTop:20, paddingBottom:70}}>
+                <div className="blog-section-one" style={{ paddingTop: 20, paddingBottom: 70 }}>
                     <Row xs={1} md={2} lg={3} xl={3} className="g-4 px-4">
                         <Col>
-                        <motion.div
-                            className="box"
-                            ref={ref}
-                            variants={boxVariant2}
-                            initial="hidden"
-                            animate={control}
+                            <motion.div
+                                className="box"
+                                ref={ref}
+                                variants={boxVariant2}
+                                initial="hidden"
+                                animate={control}
                             >
-                            <div className='blog-section-two-cardthree'>
-                                <RecipeReviewCard/>
-                            </div>
+                                <div className='blog-section-two-cardthree'>
+                                    <RecipeReviewCard />
+                                </div>
                             </motion.div>
                         </Col>
                         <Col>
-                        <motion.div
-                            className="box"
-                            ref={ref}
-                            variants={boxVariant2}
-                            initial="hidden"
-                            animate={control}
+                            <motion.div
+                                className="box"
+                                ref={ref}
+                                variants={boxVariant2}
+                                initial="hidden"
+                                animate={control}
                             >
-                            <div className='blog-section-two-cardfour'>
-                                <RecipeReviewCardTwo/>            
-                            </div>
+                                <div className='blog-section-two-cardfour'>
+                                    <RecipeReviewCardTwo />
+                                </div>
                             </motion.div>
                         </Col>
                         <Col>
-                        <motion.div
-                            className="box"
-                            ref={ref}
-                            variants={boxVariant2}
-                            initial="hidden"
-                            animate={control}
+                            <motion.div
+                                className="box"
+                                ref={ref}
+                                variants={boxVariant2}
+                                initial="hidden"
+                                animate={control}
                             >
-                            <div className='blog-section-two-cardfive mb-4'>
-                                <RecipeReviewCardThree/>    
-                            </div>
+                                <div className='blog-section-two-cardfive mb-4'>
+                                    <RecipeReviewCardThree />
+                                </div>
                             </motion.div>
                         </Col>
                     </Row>

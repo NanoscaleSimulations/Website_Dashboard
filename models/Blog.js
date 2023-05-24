@@ -1,45 +1,41 @@
-import mongoose from "mongoose";
-
+import mongoose from 'mongoose'
 
 const BlogSchema = new mongoose.Schema(
     {
         title: {
             type: String,
-            required: [true, 'Please provide a title'],
-            minLength: 3,
-            maxLength: 30,
-            trim: true,
+            required: [true, 'Please provide title'],
+            maxlength: 50,
         },
         subtitle: {
             type: String,
-            required: [true, 'Please provide a subtitle'],
-            minLength: 3,
-            maxLength: 30,
-            trim: true,
+            required: [true, 'Please provide subtitle'],
+            maxlength: 200,
         },
         author: {
             type: String,
             required: [true, 'Please provide author'],
-            minLength: 6,
-            trim: true,
+            maxlength: 50,
         },
-        text: {
+        description: {
             type: String,
-            required: [true, 'Please provide a text'],
-            trim: true,
-            
+            required: [true, 'Please provide description'],
+            maxlength: 200,
         },
         readmore: {
             type: String,
-            required: [true, 'Please provide a read more'],
-            trim: true,
-            
+            required: [true, 'Please provide readmore'],
+            maxlength: 200,
         },
         fulltext: {
             type: String,
-            required: [true, 'Please provide a full text'],
-            trim: true,
-
+            required: [true, 'Please provide fulltext'],
+            maxlength: 200,
+        },
+        blogImage: {
+            type: String,
+            // required: [true, 'Please provide fulltext'],
+            // maxlength: 200,
         },
         createdBy: {
             type: mongoose.Types.ObjectId,
@@ -48,8 +44,6 @@ const BlogSchema = new mongoose.Schema(
         },
     },
     { timestamps: true }
-);
+)
 
-
-
-export default mongoose.model('Blog', BlogSchema); 
+export default mongoose.model('Blog', BlogSchema)
