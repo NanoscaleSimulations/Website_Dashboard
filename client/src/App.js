@@ -13,7 +13,7 @@ import Products from "./pages/Products";
 import Blog from "./pages/Blog";
 import ProjectA from "./pages/ProjectA";
 import ProjectB from "./pages/ProjectB";
-
+import WebBlog from './pages/WebBlog';
 
 function App() {
 
@@ -33,6 +33,8 @@ function App() {
             <Route path='add-blog' element={<AddBlog/>}></Route>
           </Route>
           <Route exact path='/landing' element={<Home />}/>
+          <Route path='/webBlog' element={<WebBlog />} />
+          <Route path='/crud-blog' element={<WebBlog />} />
           <Route path='/projectA' element={<ProjectA />}/>
           <Route path='/projectB' element={<ProjectB />}/>
           <Route path='/products' element={<Products />}/>

@@ -6,6 +6,8 @@ const app = express();
 import 'express-async-errors';
 import morgan from 'morgan';
 
+import bodyParser from 'body-parser';
+
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -24,6 +26,7 @@ import connectDB from './db/connect.js';
 import authRouter from './routes/authRoutes.js';
 import jobsRouter from './routes/jobsRouter.js';
 import blogsRouter from './routes/blogsRouter.js';
+import webBlogsRouter from './routes/webBlogsRouter.js'
 
 // MIDDLEWARE
 import notFoundMiddleware from './middleware/not-found.js';
@@ -42,6 +45,16 @@ app.use(helmet());
 app.use(xss());
 app.use(mongoSanitize());
 
+// added for adding image in blog
+// --------------
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+app.use('/blogImages', express.static('blogImages'));
+// ---------------------------------
+
 // only when ready to deploy
 app.use(express.static(path.resolve(__dirname, './client/build')));
 
@@ -55,6 +68,8 @@ app.get('/api/v1', (req, res) => {
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/jobs', authenticateUser, jobsRouter);
 app.use('/api/v1/blogs', authenticateUser, blogsRouter);
+app.use('/api/v1/web-blogs', webBlogsRouter);
+
 
 // only when ready to deploy
 app.get('*', function (request, response) {

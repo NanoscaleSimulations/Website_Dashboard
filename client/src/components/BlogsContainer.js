@@ -1,46 +1,61 @@
-
-
-import React from 'react'
 import { useAppContext } from '../context/appContext';
 import { useEffect } from 'react';
 import Loading from './Loading';
-import Blog from './Blog';
+import Alert from './Alert';
 import Wrapper from '../assets/wrappers/JobsContainer';
+import PageBtnContainer from './PageBtnContainer';
+import Blog from './Blog';
 
+const BlogsContainer = (props) => {
+    const {
+        getBlogs,
+        blogs,
+        isLoading,
+        page,
+        totalBlogs,
+        search,
+        searchStatus,
+        searchType,
+        sort,
+        numOfPages,
+        showAlert,
+    } = useAppContext();
 
-
-const BlogsContainer = () => {
-
-    const { getBlogs, blogs, isLoading, page, totalBlogs } = useAppContext();
-    
     useEffect(() => {
-        getBlogs();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        getBlogs(props.WebBlog);
+
+        return () => {
+            getBlogs(props.WebBlog);
+        }
+        // eslint-disable-next-line
+    }, [page, search, searchStatus, searchType, sort])
 
     if (isLoading) {
         return <Loading center />;
     }
+
     if (blogs.length === 0) {
         return (
-        <Wrapper>
-            <h2>No blog to display...</h2>
-        </Wrapper>
+            <Wrapper>
+                <h2>No blogs to display...</h2>
+            </Wrapper>
         );
     }
+
     return (
         <Wrapper>
+            {showAlert && <Alert />}
             <h5>
                 {totalBlogs} blog{blogs.length > 1 && 's'} found
             </h5>
             <div className='jobs'>
                 {blogs.map((blog) => {
-                return <Blog key={blog._id} {...blog} />;
+                    return <Blog key={blog._id} {...blog} WebBlog={props.WebBlog} />;
                 })}
             </div>
+            {numOfPages > 1 && <PageBtnContainer />}
         </Wrapper>
     );
-    
 };
 
 export default BlogsContainer;
