@@ -10,7 +10,7 @@ import SignUp from '../CTA/SignUp';
 
 function CollapsibleExample () {
     return (
-        <Navbar collapseOnSelect sticky="top" expand="lg" bg="dark" variant="dark" style={{zIndex:1}}>
+        <Navbar collapseOnSelect sticky="top" expand="lg" bg="dark" variant="dark" style={{zIndex:99}}>
         <Container>
             <Navbar.Brand href="/landing"><img style={{height:'70px', paddingRight:'0px'}} src={require('../../img/logo.png')} alt="logo"></img></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
