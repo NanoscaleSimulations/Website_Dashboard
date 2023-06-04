@@ -4,38 +4,35 @@ const BlogSchema = new mongoose.Schema(
     {
         title: {
             type: String,
-            required: [true, 'Please provide title'],
-            maxlength: 50,
+            required: [true, 'Please provide a title'],
+            minLength: 3,
+            maxLength: 30,
         },
         subtitle: {
             type: String,
-            required: [true, 'Please provide subtitle'],
-            maxlength: 200,
+            required: [true, 'Please provide a subtitle'],
+            minLength: 3,
+            maxLength: 30,
         },
         author: {
             type: String,
             required: [true, 'Please provide author'],
-            maxlength: 50,
+            minLength: 6,
         },
         description: {
             type: String,
-            required: [true, 'Please provide description'],
-            maxlength: 200,
+            required: [true, 'Please provide a text'],
         },
         readmore: {
             type: String,
-            required: [true, 'Please provide readmore'],
-            maxlength: 200,
+            required: [true, 'Please provide a read more'],
         },
         fulltext: {
             type: String,
-            required: [true, 'Please provide fulltext'],
-            maxlength: 200,
+            required: [true, 'Please provide a full text'],
         },
         blogImage: {
             type: String,
-            // required: [true, 'Please provide fulltext'],
-            // maxlength: 200,
         },
         createdBy: {
             type: mongoose.Types.ObjectId,

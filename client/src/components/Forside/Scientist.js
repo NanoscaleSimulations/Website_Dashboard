@@ -13,7 +13,7 @@ import '../../styles/Home.css';
 
 
 const boxVariant = {
-    visible: { opacity: 1, scale: 1, transition: { duration: 1 } },
+    visible: { opacity: 1, scale: 1, transition: { duration: 0.7 } },
     hidden: { opacity: 0, scale: 0 }
 };
 
@@ -54,15 +54,15 @@ const Scientist = () => {
                         </div>
                         <Card.Body className="" style={{overflowY: 'auto'}}>
                             <Card.Title>
-                                <h4>Navn</h4>
-                                <h5>Titel</h5>
+                                <h4>Jannick Pedersen</h4>
+                                <h5>Full Stack programmer</h5>
                             </Card.Title>
                             <hr></hr>
                             <div className="" style = {{display:"flex", alignItems: "center", justifyContent:"end"}}>
                                 < FaQuoteRight  style={{display:"flex", alignItems: "center", justifyContent:"end", margin: '0px', marginBottom:10}} size={20}/>
                             </div>
                             <Card.Text>
-                                <p>Tekst</p>
+                                <p>Jeg har arbejdet hos Nanoscale i 5 år som en udvikler. Jeg er god til at have overskud og fokus</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
                             </Card.Text>
                             < FaQuoteLeft size={20}/>
@@ -89,15 +89,15 @@ const Scientist = () => {
                         </div>
                         <Card.Body className="" style={{overflowY: 'auto'}}>
                             <Card.Title>
-                                <h4>Navn</h4>
-                                <h5>Titel</h5>
+                                <h4>Rukshan Pokharel</h4>
+                                <h5>Full Stack programmer</h5>
                             </Card.Title>
                             <hr></hr>
                             <div className="" style = {{display:"flex", alignItems: "center", justifyContent:"end"}}>
                                 < FaQuoteRight  style={{display:"flex", alignItems: "center", justifyContent:"end", margin: '0px', marginBottom:10}} size={20}/>
                             </div>
                             <Card.Text>
-                                <p>Tekst</p>
+                                <p>Jeg har arbejdet hos Nanoscale i 5 år som en udvikler. Jeg er god til at have overskud og fokus</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
                             </Card.Text>
                             < FaQuoteLeft size={20}/>
@@ -124,15 +124,15 @@ const Scientist = () => {
                         </div>
                         <Card.Body className="" style={{overflowY: 'auto'}}>
                             <Card.Title>
-                                <h4>Navn</h4>
-                                <h5>Titel</h5>
+                                <h4>Bob Larsen</h4>
+                                <h5>Motivator</h5>
                             </Card.Title>
                             <hr></hr>
                             <div className="" style = {{display:"flex", alignItems: "center", justifyContent:"end"}}>
                                 < FaQuoteRight  style={{display:"flex", alignItems: "center", justifyContent:"end", margin: '0px', marginBottom:10}} size={20}/>
                             </div>
                             <Card.Text>
-                                <p>Tekst</p>
+                                <p>Jeg har arbejdet hos Nanoscale i 5 år som en udvikler. Jeg er god til at have overskud og fokus</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
                             </Card.Text>
                             < FaQuoteLeft size={20}/>

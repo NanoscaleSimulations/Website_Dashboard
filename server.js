@@ -7,6 +7,8 @@ import 'express-async-errors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 
+import bodyParser from 'body-parser';
+
 import { dirname } from 'path';
 import { fileURLToPath } from 'url';
 import path from 'path';
@@ -26,6 +28,7 @@ import authRouter from './routes/authRoutes.js';
 import blogsRouter from './routes/blogsRouter.js';
 import landingPageRouter from './routes/landingPageRouter.js'
 
+// import webBlogsRouter from './routes/webBlogsRouter.js'
 
 // MIDDLEWARE
 import notFoundMiddleware from './middleware/not-found.js';
@@ -47,6 +50,7 @@ app.use(mongoSanitize());
 // added for adding image in blog
 // --------------
 app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({
     extended: false
 }));
@@ -67,6 +71,9 @@ app.use(express.static(path.resolve(__dirname, './client/build')));
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/blog', authenticateUser, blogsRouter);
 app.use('/api/v1/landing-blog', landingPageRouter);
+// app.use('/api/v1/jobs', authenticateUser, jobsRouter);
+// app.use('/api/v1/blogs', authenticateUser, blogsRouter);
+app.use('/api/v1/web-blogs', webBlogsRouter);
 
 
 // only when ready to deploy

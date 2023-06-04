@@ -15,6 +15,7 @@ import ProjectA from "./pages/ProjectA";
 import ProjectB from "./pages/ProjectB";
 import Landing from './pages/Landing'
 import Blogs from './pages/dashboard/Blogs';
+import WebBlog from './pages/WebBlog';
 
 function App() {
 
@@ -31,8 +32,9 @@ function App() {
             <Route path='geography' element={<Geography />} />
             <Route path='blogs' element={<Blogs />} />
           </Route>
-          <Route exact path='/landing' element={<Landing />} />
-          <Route exact path='/crud-blog' element={<Home />} />
+          <Route exact path='/landing' element={<Home />} />
+          <Route path='/webBlog' element={<WebBlog />} />
+          <Route path='/crud-blog' element={<WebBlog />} />
           <Route path='/projectA' element={<ProjectA />} />
           <Route path='/projectB' element={<ProjectB />} />
           <Route path='/products' element={<Products />} />
