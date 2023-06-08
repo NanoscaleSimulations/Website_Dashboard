@@ -1,22 +1,7 @@
 import styled from 'styled-components'
 
 const Wrapper = styled.article`
-  background: var(--white);
-  border-radius: var(--borderRadius);
-  display: grid;
-  grid-template-rows: 1fr auto;
-  box-shadow: var(--shadow-2);
 
-  header {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--grey-100);
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    h5 {
-      letter-spacing: 0;
-    }
-  }
   .main-icon {
     width: 60px;
     height: 60px;

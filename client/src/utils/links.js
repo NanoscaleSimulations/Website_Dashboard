@@ -19,13 +19,13 @@ const links = [
         icon: <IoBarChartSharp />,
     },
     {
-        id: 2,
-        text: 'geography',
-        path: 'geography',
+        id: 2, 
+        text: 'geography', 
+        path: 'geography', 
         icon: <GiWorld />,
     },
     {
-        id: 9,
+        id: 3,
         text: 'Client section'
     },
 
@@ -36,26 +36,23 @@ const links = [
     //     icon: <FaBlogger />,
     // },
     {
-        id: 3,
+        id: 4,
         text: 'blogs',
         path: 'blogs',
         icon: <FaBlogger />,
     },
     {
         text: 'User section',
-        id: 8,
-    },
-
-    { id: 4, text: 'geography', path: 'geography', icon: <MdPlace /> },
-
-    {
         id: 5,
+    },
+    {
+        id: 6,
         text: 'profile',
         path: 'profile',
         icon: <ImProfile />,
     },
     {
-        id: 10,
+        id: 7,
         text: 'users',
         path: 'users',
         icon: <FaUsers />

@@ -27,11 +27,6 @@ const BlogsContainer = (props) => {
         return () => {
             getBlogs(props.isBlogPage);
         }
-        // getBlogs(props.WebBlog);
-
-        // return () => {
-        //     getBlogs(props.WebBlog);
-        // }
 
         // eslint-disable-next-line
     }, [page, search, searchStatus, searchType, sort])
@@ -57,7 +52,6 @@ const BlogsContainer = (props) => {
             <div className='jobs'>
                 {blogs.map((blog) => {
                     return <Blog key={blog._id} {...blog} isBlogPage={props.isBlogPage} />;
-                    // return <Blog key={blog._id} {...blog} WebBlog={props.WebBlog} />;
                 })}
             </div>
             {numOfPages > 1 && <PageBtnContainer />}

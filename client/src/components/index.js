@@ -12,5 +12,6 @@ import StatsContainer from './StatsContainer';
 import ChartsContainer from './ChartsContainer';
 import Loading from './Loading';
 
+
 // All the used components
-export { Logo, Alert, BigSidebar, FormRow, Navbar, SmallSidebar, FormRowSelect, SearchContainer, BlogsContainer, StatsContainer, ChartsContainer, Loading };
+export { Logo, Alert, BigSidebar, FormRow, Navbar, SmallSidebar, FormRowSelect, SearchContainer, BlogsContainer, StatsContainer, ChartsContainer, Loading};

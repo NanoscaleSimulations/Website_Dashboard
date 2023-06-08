@@ -13,8 +13,6 @@ import ModalOne from './modal';
 import Lndmode from '../Darkmode/darkmode';
 
 
-
-
 const ExpandMore = styled((props) => {
 
 

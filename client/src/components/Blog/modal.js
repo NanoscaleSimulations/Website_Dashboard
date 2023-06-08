@@ -24,7 +24,7 @@ function ModalOne() {
 
             <Modal show={show} fullscreen={fullscreen} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Fuld Visning Af Blog</Modal.Title>
+                    <Modal.Title>Modal 1: Fuld Visning Af Blog</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="show-grid">
         

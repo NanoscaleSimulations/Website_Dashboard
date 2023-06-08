@@ -27,7 +27,7 @@ const boxVariant2 = {
 // const q = query(colRef, where('label', '==', 1,), limit(3))
 
 
-function Blog() {
+function BlogPage() {
 
 
     const control = useAnimation();
@@ -123,4 +123,4 @@ function Blog() {
 }
 
 
-export default Blog;
+export default BlogPage;

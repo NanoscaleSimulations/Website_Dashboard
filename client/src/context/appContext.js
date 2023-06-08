@@ -167,26 +167,26 @@ const AppProvider = ({ children }) => {
         dispatch({ type: CLEAR_VALUES })
     }
 
+    
     // Show all stats from the 3 different status
+    const showStats = async () => {
+        dispatch({ type: SHOW_STATS_BEGIN })
+        try {
+            const { data } = await authFetch('/jobs/stats')
+            dispatch({
+                type: SHOW_STATS_SUCCESS,
+                payload: {
+                    stats: data.defaultStats,
+                    monthlyApplications: data.monthlyApplications,
+                },
+            })
+        } catch (error) {
+        console.log(error.response)
+            logoutUser()
+        }
 
-    // const showStats = async () => {
-    //     dispatch({ type: SHOW_STATS_BEGIN })
-    //     try {
-    //         const { data } = await authFetch('/jobs/stats')
-    //         dispatch({
-    //             type: SHOW_STATS_SUCCESS,
-    //             payload: {
-    //                 stats: data.defaultStats,
-    //                 monthlyApplications: data.monthlyApplications,
-    //             },
-    //         })
-    //     } catch (error) {
-    //         console.log(error.response)
-    //         logoutUser()
-    //     }
-
-    //     clearAlert()
-    // }
+        clearAlert()
+    }
 
 
     // BLOG CRUD BEGINS
@@ -349,7 +349,7 @@ const AppProvider = ({ children }) => {
                 setEditBlog,
                 deleteBlog,
                 editBlog,
-                // showStats,
+                showStats,
                 clearFilters,
                 changePage,
                 getCurrentUser,
