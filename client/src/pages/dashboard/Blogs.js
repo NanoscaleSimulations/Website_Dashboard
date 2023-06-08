@@ -137,7 +137,7 @@ const Blogs = () => {
                 </div>
             </form>
 
-            <BlogsContainer landingPage={false} />
+            <BlogsContainer isBlogPage={false} />
         </Wrapper>
 
 

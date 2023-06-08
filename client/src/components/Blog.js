@@ -15,13 +15,13 @@ const Blog = ({
     createdAt,
     fulltext,
     blogImage,
-    landingPage
+    isBlogPage
 }) => {
     const { setEditBlog, deleteBlog } = useAppContext()
 
     let date = moment(createdAt)
     date = date.format('MMM Do, YYYY');
-    const blogImageName = blogImage.substring(33);
+    const blogImageName = blogImage?.substring(33);
     return (
         <Wrapper>
             <header>
@@ -40,7 +40,7 @@ const Blog = ({
                     <img src={"../../blogImages/" + blogImageName} alt='blogImage' style={{ height: '150px', width: '150px' }} />
                 </div>
 
-                {landingPage ? (<>
+                {isBlogPage ? (<>
                 </>) : <>
                     <footer>
                         <div className='actions'>

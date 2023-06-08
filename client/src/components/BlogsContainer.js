@@ -22,10 +22,10 @@ const BlogsContainer = (props) => {
     } = useAppContext();
 
     useEffect(() => {
-        getBlogs(props.landingPage);
+        getBlogs(props.isBlogPage);
 
         return () => {
-            getBlogs(props.landingPage);
+            getBlogs(props.isBlogPage);
         }
         // getBlogs(props.WebBlog);
 
@@ -56,7 +56,7 @@ const BlogsContainer = (props) => {
             </h5>
             <div className='jobs'>
                 {blogs.map((blog) => {
-                    return <Blog key={blog._id} {...blog} landingPage={props.landingPage} />;
+                    return <Blog key={blog._id} {...blog} isBlogPage={props.isBlogPage} />;
                     // return <Blog key={blog._id} {...blog} WebBlog={props.WebBlog} />;
                 })}
             </div>

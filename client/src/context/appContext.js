@@ -53,7 +53,7 @@ const AppProvider = ({ children }) => {
     // Axios
     // axios.defaults.headers['Authorization'] = `Bearer ${state.token}`;
     const authFetch = axios.create({
-        baseURL: '/api/v1',
+        baseURL: 'api/v1',
     });
 
     // Request interceptor
@@ -218,14 +218,14 @@ const AppProvider = ({ children }) => {
         clearAlert();
     };
 
-    const getBlogs = async (landingPage) => {
+    const getBlogs = async (isBlogPage) => {
         const { page, search, searchStatus, searchType, sort } = state;
         let url = '';
-        if (landingPage) {
-            url = `/landing-blog?page=${page}&status=${searchStatus}&blogType=${searchType}&sort=${sort}&isLanding=${landingPage}`;
+        if (isBlogPage) {
+            url = `/landing-blog?page=${page}&status=${searchStatus}&blogType=${searchType}&sort=${sort}&isLanding=${isBlogPage}`;
         }
         else {
-            url = `/blog?page=${page}&status=${searchStatus}&blogType=${searchType}&sort=${sort}&isLanding=${landingPage}`;
+            url = `/blog?page=${page}&status=${searchStatus}&blogType=${searchType}&sort=${sort}&isLanding=${isBlogPage}`;
         }
         if (search) {
             url = url + `&search=${search}`;

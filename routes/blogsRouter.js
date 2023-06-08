@@ -1,7 +1,7 @@
 import express from 'express';
 // file upload imports
 import multer from 'multer';
-import uuidv4 from 'uuid/v4.js'
+import { v4 as uuidv4 } from 'uuid';
 import Blog from '../models/Blog.js';
 
 const router = express.Router();
