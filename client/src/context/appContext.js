@@ -262,7 +262,7 @@ const AppProvider = ({ children }) => {
                 description,
                 readmore,
                 fulltext } = state;
-
+            console.log("i am in edit blog");
             await authFetch.patch(`/blog/${state.editBlogId}`, {
                 title,
                 subtitle,
