@@ -1,5 +1,5 @@
 import moment from 'moment'
-import { FaLocationArrow, FaBriefcase, FaCalendarAlt } from 'react-icons/fa'
+import { FaBriefcase, FaCalendarAlt, FaBookReader, FaRegCommentDots } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { useAppContext } from '../context/appContext'
 import Wrapper from '../assets/wrappers/Job'
@@ -33,9 +33,11 @@ const Blog = ({
             </header>
             <div className='content'>
                 <div className='content-center'>
-                    <BlogInfo icon={<FaLocationArrow />} text={author} />
+                    <BlogInfo icon={<FaBookReader />} text={author} />
                     <BlogInfo icon={<FaCalendarAlt />} text={date} />
                     <BlogInfo icon={<FaBriefcase />} text={description} />
+                    <BlogInfo icon={<FaRegCommentDots />} text={readmore} />
+                    <BlogInfo icon={<FaBriefcase />} text={fulltext} />
 
                     <img src={"../../blogImages/" + blogImageName} alt='blogImage' style={{ height: '150px', width: '150px' }} />
                 </div>

@@ -33,7 +33,7 @@ function App() {
             <Route path='blogs' element={<Blogs />} />
           </Route>
           <Route exact path='/landing' element={<Home />} />
-          {/* <Route path='/webBlog' element={<WebBlog />} /> */}
+          <Route path='/webBlog' element={<WebBlog />} />
           {/* <Route path='/crud-blog' element={<WebBlog />} /> */}
           <Route path='/projectA' element={<ProjectA />} />
           <Route path='/projectB' element={<ProjectB />} />
